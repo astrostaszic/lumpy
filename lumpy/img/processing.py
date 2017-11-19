@@ -3,6 +3,10 @@ from pygame import surfarray, transform
 import numpy as np
 
 
+def down_scale(img, new_width=28, new_height=28):
+    return transform.scale(img, (new_width, new_height))
+
+
 def gray_scale(img):
     arr = surfarray.array3d(img)
     # luminosity filter
@@ -11,5 +15,6 @@ def gray_scale(img):
     return surfarray.make_surface(arr)
 
 
-def down_scale(img):
-    return transform.scale(img, (28, 28))
+def np_gray_scale(gray_scale_surface):
+    width, height = gray_scale_surface.get_size()
+    return np.array([[gray_scale_surface.get_at((i, j))[0] for j in range(height)] for i in range(width)])
