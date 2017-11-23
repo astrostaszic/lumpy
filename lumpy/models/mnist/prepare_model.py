@@ -88,6 +88,7 @@ def prepare_lin_reg():
 
 def prepare_nn():
     mnist_dir = './../../../data/mnist'
+    print('fetching')
     mnist = fetch_mldata('MNIST original', data_home=mnist_dir)
 
     examples_count = mnist.data.shape[0]
@@ -127,4 +128,4 @@ def prepare_nn():
     model.save('mnist.keras')
 
 
-# prepare_nn()
+prepare_nn()
