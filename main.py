@@ -1,3 +1,3 @@
-from test.cam import run
+from test.cam import main
 
-run()
+main()

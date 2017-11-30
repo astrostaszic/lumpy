@@ -2,7 +2,9 @@ import numpy as np
 from lumpy.models.mnist.prepare_model import add_bias_feature, sigmoid
 from lumpy.img.processing import rescale, gray_scale, np_gray_scale, np_to_img
 import pygame
-import matplotlib.pyplot as plt
+
+
+# import matplotlib.pyplot as plt
 
 def model_from_file(weights_file):
     return Model(np.load(weights_file))
@@ -23,15 +25,15 @@ class Model:
         gs = gray_scale(ds)
 
         ngs = 1 - (np_gray_scale(gs).T) / 255
-        # ngs = ngs.round()
+        ngs = ngs.round()
         if verbose:
             self.dump_to_screen(np_to_img(ngs))
-            plt.show()
+            # plt.show()
         features = add_bias_feature(ngs.reshape(1, 784))
         # features = np.array([round(f) for f in features[0]])
         return features
 
     def predict(self, image):
         features = self.process(image)
-        sgm = features @ self.W
+        sgm = features.dot(self.W)
         return np.argmax(sgm)

@@ -7,7 +7,7 @@ from lumpy.img.processing import rescale, gray_scale, np_gray_scale
 from lumpy.models.mnist.linear_reg_model import model_from_file
 # from lumpy.models.mnist.nn_model import model_from_file
 # from lumpy.models.animals.dogs_cats_keras import model_from_file
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 from pygame import surfarray
 
@@ -34,3 +34,6 @@ def main():
                 print()
                 time.sleep(0.1)
 
+
+
+main()

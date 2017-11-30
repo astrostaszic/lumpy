@@ -1,7 +1,7 @@
 import numpy as np
-from sklearn.datasets import fetch_mldata
-import matplotlib.pyplot as plt
-from tensorflow.contrib import keras
+# from sklearn.datasets import fetch_mldata
+# import matplotlib.pyplot as plt
+# from tensorflow.contrib import keras
 
 
 def add_bias_feature(X):
@@ -13,7 +13,7 @@ def sigmoid(x):
 
 
 def hypotheses(W, X):
-    result = X @ W
+    result = X.dot(W)
     return sigmoid(result)
 
 
