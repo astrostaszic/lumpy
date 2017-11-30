@@ -128,4 +128,4 @@ def prepare_nn():
     model.save('mnist.keras')
 
 
-prepare_nn()
+# prepare_nn()

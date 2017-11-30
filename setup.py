@@ -11,6 +11,6 @@ setup(
     author_email='',
     description='',
     entry_points={
-        'console_scripts': ['mnist = test.mnist_test:main']
+        'console_scripts': ['mnist=test.cam:main']
     }
 )
