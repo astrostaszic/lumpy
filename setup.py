@@ -4,7 +4,7 @@ setup(
     name='lumpy',
     version='0.11.16',
     packages=['lumpy'],
-    install_requires=['numpy', 'pygame', 'tensorflow'],
+    install_requires=['numpy', 'pygame'],
     url='',
     license='',
     author='astrostaszic',
