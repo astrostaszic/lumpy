@@ -3,13 +3,10 @@ import time
 import pygame
 
 from lumpy.img.sources.camera import Camera
-from lumpy.img.processing import rescale, gray_scale, np_gray_scale
-from lumpy.models.mnist.linear_reg_model import model_from_file
+# from lumpy.models.mnist.linear_reg_model import model_from_file
 # from lumpy.models.mnist.nn_model import model_from_file
-# from lumpy.models.animals.dogs_cats_keras import model_from_file
-# import matplotlib.pyplot as plt
-import numpy as np
-from pygame import surfarray
+from lumpy.models.animals.dogs_cats_keras import model_from_file
+
 
 
 def main():
@@ -17,22 +14,20 @@ def main():
     h = 480
     size = (w, h)
     screen = pygame.display.set_mode((w, h))
-    # model = model_from_file('../lumpy/models/animals/dogs_cats.model')
-    # model = model_from_file('../lumpy/models/mnist/mnist.keras')
-    model = model_from_file('../lumpy/models/mnist/linreg.npy')
+    model = model_from_file('./lumpy/models/animals/dogs_cats.model')
+    # model = model_from_file('./lumpy/models/mnist/mnist.keras')
+    # model = model_from_file('./lumpy/models/mnist/linreg.npy')
 
-
-    first = True
     with Camera() as cam:
         while True:
-            for i in range(7):
-                img = cam.get_image()
-                screen.blit(img, (0, 0))
-                pygame.display.flip()
-                pred = model.predict(img)
-                print(pred)
-                print()
-                time.sleep(0.1)
+            start = time.time()
+            img = cam.get_image()
+            screen.blit(img, (0, 0))
+            pygame.display.flip()
+            pred = model.predict(img)
+            stop = time.time()
+            print(pred, format(stop - start, '.3f'))
+            time.sleep(0.1)
 
 
 
