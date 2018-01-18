@@ -4,7 +4,7 @@ setup(
     name='lumpy',
     version='0.11.16',
     packages=['lumpy'],
-    install_requires=['numpy', 'pygame', 'imagehash', 'PIL'],
+    install_requires=['numpy', 'pygame', 'imagehash', 'PIL', 'ephem'],
     url='',
     license='',
     author='astrostaszic',

@@ -2,7 +2,7 @@ import time
 
 import pygame
 
-from lumpy.img.sources.camera import Camera
+from lumpy.img.sources.pygame_camera import PygameCamera
 from lumpy.img.processing import rescale, gray_scale, np_gray_scale
 from lumpy.models.mnist.linear_reg_model import model_from_file
 # from lumpy.models.mnist.nn_model import model_from_file
@@ -23,7 +23,7 @@ def main():
 
     first = True
     l = []
-    with Camera() as cam:
+    with PygameCamera() as cam:
         while True:
             time_1 = time.time()
             img = cam.get_image()

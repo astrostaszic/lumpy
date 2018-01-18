@@ -2,7 +2,7 @@ import datetime
 from PIL import Image
 import imagehash
 import pygame
-from lumpy.img.sources.camera import Camera
+from lumpy.img.sources.pygame_camera import PygameCamera
 import time
 import csv
 
@@ -53,28 +53,29 @@ def get_iss_beneath_point():
     return GeoPoint(iss.sublat, iss.sublong)
 
 
-screen = pygame.display.set_mode((640, 640))
+def main():
+    screen = pygame.display.set_mode((640, 640))
 
-csvfile = open('names.csv', 'w', newline='')
-fieldnames = ['hash', 'datetime', 'lat', 'lon']
-writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-writer.writeheader()
+    csvfile = open('names.csv', 'w', newline='')
+    fieldnames = ['hash', 'datetime', 'lat', 'lon']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
 
-try:
-    with Camera(1) as cam:
-        while True:
-            img = cam.get_image()
-            pil_string_image = pygame.image.tostring(img, "RGB")
-            im = Image.frombytes("RGB", img.get_size(), pil_string_image)
-            img_hash = imagehash.average_hash(im, 24)
-            date = datetime.datetime.utcnow()
-            location = get_iss_beneath_point()
-            screen.blit(img, (0, 0))
-            pygame.display.flip()
-            im.save('img/{},{},{}.jpg'.format(date, location.lat, location.lon))
-            writer.writerow({'hash': img_hash, 'datetime': date, 'lat': location.lat, 'lon': location.lon})
-            time.sleep(1)
-except KeyboardInterrupt:
-    pass
-finally:
-    csvfile.close()
+    try:
+        with PygameCamera(0) as cam:
+            while True:
+                img = cam.get_image()
+                pil_string_image = pygame.image.tostring(img, "RGB")
+                im = Image.frombytes("RGB", img.get_size(), pil_string_image)
+                img_hash = imagehash.average_hash(im, 24)
+                date = datetime.datetime.utcnow()
+                location = get_iss_beneath_point()
+                screen.blit(img, (0, 0))
+                pygame.display.flip()
+                im.save('img/{},{},{}.jpg'.format(date, location.lat, location.lon))
+                writer.writerow({'hash': img_hash, 'datetime': date, 'lat': location.lat, 'lon': location.lon})
+                time.sleep(1)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        csvfile.close()
